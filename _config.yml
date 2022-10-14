@@ -97,9 +97,13 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-# theme: landscape
+theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/mengjoy/mengjoy.github.io.git
+  branch: main
+  # token: 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
+
