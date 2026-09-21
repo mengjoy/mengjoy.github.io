@@ -1,0 +1,16 @@
+{
+  "name": "mengjoy.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "个人网站 - 基于 VitePress，通过 markdown 更新内容（分类/文章/简介）",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "deploy": "node scripts/deploy.mjs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
