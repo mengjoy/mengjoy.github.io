@@ -4,7 +4,7 @@ title: 关于我
 
 # 关于我
 
-这里是个人简介，按你自己的情况改就行。
+
 
 ## 我是谁
 
@@ -14,7 +14,7 @@ title: 关于我
 
 ## 联系方式
 
-- 邮箱：you@example.com
+- 邮箱：
 - GitHub：[@mengjoy](https://github.com/mengjoy)
 
 ## 这个站点是怎么更新的

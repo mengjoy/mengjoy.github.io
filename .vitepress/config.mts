@@ -23,7 +23,7 @@ export default defineConfig({
     },
     docFooter: { prev: '上一篇', next: '下一篇' },
     outline: { label: '目录' },
-    lastUpdated: { text: '最后更新于' },
+    lastUpdated: { text: '最近更新于' },
     returnToTopLabel: '回到顶部',
     sidebarMenuLabel: '菜单',
     darkModeSwitchLabel: '主题',
