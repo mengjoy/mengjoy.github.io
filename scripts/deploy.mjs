@@ -18,6 +18,25 @@ if (!fs.existsSync(dist)) {
   process.exit(1)
 }
 
+// 把构建产物里的 *.html（除 index.html / 404.html）转成 <name>/index.html 目录形态。
+// 原因：VitePress 的 cleanUrls 只改链接形态(/about/)，物理文件仍是 about.html；
+// 而 GitHub Pages 等静态托管访问 /about/ 时找的是 about/index.html，否则 404。
+function htmlToDirForm(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name)
+    if (entry.isDirectory()) {
+      htmlToDirForm(full)
+    } else if (entry.name.endsWith('.html') && entry.name !== 'index.html' && entry.name !== '404.html') {
+      const name = entry.name.replace(/\.html$/, '')
+      const targetDir = path.join(dir, name)
+      fs.mkdirSync(targetDir, { recursive: true })
+      fs.renameSync(full, path.join(targetDir, 'index.html'))
+    }
+  }
+}
+htmlToDirForm(dist)
+console.log('已将页面转为目录形态(about/ index.html) ✅')
+
 // 只拷贝构建产物到根目录（不碰 .git / node_modules / 源码）
 const skip = new Set(['.git', 'node_modules', '.vitepress', 'package.json', 'package-lock.json', 'scripts'])
 for (const entry of fs.readdirSync(dist)) {
@@ -27,6 +46,11 @@ for (const entry of fs.readdirSync(dist)) {
   fs.cpSync(src, dest, { recursive: true, force: true })
 }
 console.log('已同步构建产物到仓库根目录 ✅')
+
+// 关键：GitHub Pages 默认会用 Jekyll 处理仓库。必须加 .nojekyll 关闭它，
+// 否则 Jekyll 不认识 VitePress 产物，会生成一个空的默认站点（正是你线上看到的现象）。
+fs.writeFileSync(path.join(root, '.nojekyll'), '')
+console.log('已写入 .nojekyll（关闭 Jekyll）✅')
 
 // 解析提交信息
 const idx = process.argv.indexOf('-m')

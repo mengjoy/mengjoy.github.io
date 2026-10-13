@@ -55,8 +55,8 @@ const posts = computed<Post[]>(() => {
         date: fm.date || '',
         categories: fm.categories || ['未分类'],
         tags: fm.tags || [],
-        // VitePress 默认构建产物为 .html，GitHub Pages 直接托管需要带后缀
-        url: `/posts/${name}.html`
+        // cleanUrls:true 下文章页生成为 /posts/<name>/index.html，链接用目录形式
+        url: `/posts/${name}/`
       }
     })
     .filter((p) => p.date) // 没有 date 的（如列表页本身）不参与

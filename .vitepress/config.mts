@@ -7,6 +7,9 @@ export default defineConfig({
   description: '前端开发者的个人网站：分类、文章、简介',
   lang: 'zh-CN',
   lastUpdated: true,
+  // 关键：生成 /about/ -> about/index.html 这种目录形态，
+  // 否则 GitHub Pages 等静态托管访问 /about/ 会 404
+  cleanUrls: true,
 
   themeConfig: {
     nav: [
