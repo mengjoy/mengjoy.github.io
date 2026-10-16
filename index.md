@@ -15,11 +15,17 @@ hero:
 
 features:
   - title: 分类
-    details: 技术栈
+    details: 按分类浏览全部文章
+    link: /posts/
+    linkText: 浏览分类
   - title: 文章
-    details: 技术文章
+    details: 技术笔记与踩坑记录
+    link: /posts/
+    linkText: 阅读文章
   - title: 简介
-    details: 关于我
+    details: 关于我与联系方式
+    link: /about/
+    linkText: 关于我
 ---
 
 <script setup>

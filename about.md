@@ -25,4 +25,3 @@ title: 关于我
 - 首页简介在 `index.md`
 - 本页在 `about.md`
 
-改完文字，`npm run dev` 本地预览，`npm run build` 提交到仓库，GitHub Pages 自动上线。

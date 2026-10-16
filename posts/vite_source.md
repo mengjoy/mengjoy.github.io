@@ -1,10 +1,10 @@
 ---
 title: vite一篇文章总结
-date: 2026-09-18
+date: 2026-10-14
 categories:
-  - 技术
+  - vite
 tags:
-  - 技术
+  - vite
 description:  vite学习
 ---
 

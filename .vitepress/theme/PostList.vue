@@ -45,7 +45,7 @@ function parseFrontmatter(raw: string): Record<string, any> {
   return data
 }
 
-const posts = computed<Post[]>(() => {
+const allPosts = computed<Post[]>(() => {
   return Object.entries(raws)
     .map(([path, raw]: [string, string]) => {
       const fm = parseFrontmatter(raw || '')
@@ -63,10 +63,25 @@ const posts = computed<Post[]>(() => {
     .sort((a, b) => (a.date < b.date ? 1 : -1))
 })
 
-// 按分类聚合
+// 全部分类（去重，按出现顺序）
+const categories = computed<string[]>(() => {
+  const seen = new Set<string>()
+  const list: string[] = []
+  for (const p of allPosts.value) {
+    for (const c of p.categories) {
+      if (!seen.has(c)) {
+        seen.add(c)
+        list.push(c)
+      }
+    }
+  }
+  return list
+})
+
+// 按分类聚合（静态渲染，全部展示；导航条用锚点跳转到对应分类区块）
 const grouped = computed<[string, Post[]][]>(() => {
   const map = new Map<string, Post[]>()
-  for (const p of posts.value) {
+  for (const p of allPosts.value) {
     for (const c of p.categories) {
       if (!map.has(c)) map.set(c, [])
       map.get(c)!.push(p)
@@ -75,17 +90,32 @@ const grouped = computed<[string, Post[]][]>(() => {
   return [...map.entries()]
 })
 
+// 分类锚点：跳到 /posts/#分类名 区块（完全静态，无需 JS）
+function catAnchor(cat: string) {
+  return `#${cat}`
+}
+
 function fmt(date: string) {
   return date ? date.slice(0, 10) : ''
 }
 </script>
 
 <template>
-  <p v-if="posts.length === 0" class="empty">还没有文章，在 <code>posts/</code> 目录新建一个带 <code>date</code> 的 markdown 试试。</p>
+  <!-- 分类导航条：点分类即锚点跳转到对应区块 -->
+  <nav class="cat-nav">
+    <a href="/posts/">全部</a>
+    <a
+      v-for="c in categories"
+      :key="c"
+      :href="catAnchor(c)"
+    >{{ c }}</a>
+  </nav>
+
+  <p v-if="allPosts.length === 0" class="empty">还没有文章，在 <code>posts/</code> 目录新建一个带 <code>date</code> 的 markdown 试试。</p>
 
   <div v-for="[cat, list] in grouped" :key="cat" class="cat-block">
     <h2 :id="cat" class="cat-title">
-      <a :href="`#${cat}`" class="cat-anchor">{{ cat }}</a>
+      <a :href="catAnchor(cat)" class="cat-anchor">{{ cat }}</a>
       <span class="cat-count">{{ list.length }}</span>
     </h2>
     <ul class="post-list">
@@ -98,6 +128,25 @@ function fmt(date: string) {
 </template>
 
 <style scoped>
+.cat-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+}
+.cat-nav a {
+  font-size: 0.9rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 999px;
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.cat-nav a:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
 .cat-block {
   margin: 1.5rem 0;
 }
@@ -107,6 +156,7 @@ function fmt(date: string) {
   gap: 0.5rem;
   border-left: 4px solid var(--vp-c-brand-1, #3b82f6);
   padding-left: 0.6rem;
+  scroll-margin-top: 80px; /* 锚点跳转时为固定导航栏留白 */
 }
 .cat-anchor {
   color: inherit;
