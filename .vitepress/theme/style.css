@@ -1,0 +1,62 @@
+/* 全站深空暗色 + 星空背景适配
+   --------------------------------------------------------------
+   1. 锁定暗色基调（config 里 appearance: 'force-dark' 已强制）
+   2. 让 VitePress 默认实色背景变透明，露出下方 Canvas 星空
+   3. 把内容层抬到星空之上，保证文字可读、点击不被挡
+   4. 微调品牌色为偏青蓝紫，呼应宇宙色调
+*/
+
+:root {
+  --vp-c-brand-1: #6ea8fe;
+  --vp-c-brand-2: #8b5cf6;
+  --vp-c-brand-3: #4f8cff;
+  --vp-c-brand-soft: rgba(110, 168, 254, 0.16);
+}
+
+/* 兜底背景色，避免 Canvas 未加载时的白闪 */
+html {
+  background: #05060f;
+}
+
+/* 默认主题的各个实色背景块改为透明，让星空透出来 */
+body,
+#VPApp,
+.VPNav,
+.VPContent,
+.VPHome,
+.VPFooter,
+.VPSidebar,
+.doc,
+.vp-doc {
+  background: transparent !important;
+}
+
+/* 内容层抬到星空（z-index:0）之上，并相对定位 */
+#VPApp {
+  position: relative;
+  z-index: 1;
+}
+
+/* 导航栏原本的毛玻璃实底改为透明，透出星空；保留底部细线 */
+.VPNav {
+  background: transparent !important;
+  backdrop-filter: blur(6px);
+}
+.VPNavBar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent !important;
+}
+
+/* 代码块/引用等保持轻微深色，既可读又透出一点星点 */
+.vp-doc div[class*='language-'],
+.vp-doc pre,
+.vp-doc blockquote {
+  background: rgba(10, 14, 35, 0.72) !important;
+}
+
+/* 首页 hero / features 卡片透明，避免压住星空 */
+.VPHero,
+.VPFeatures,
+.home-page {
+  background: transparent !important;
+}

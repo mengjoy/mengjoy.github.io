@@ -9,12 +9,12 @@ title: 关于我
 ## 我是谁
 
 - 截至2026年拥有七年经验前端开发者、一年Python经验
-- 
+
 
 
 ## 联系方式
 
-- 邮箱：[1097731118@qq.com](1097731118@qq.com)
+- 邮箱：[1097731118@qq.com](mailto:1097731118@qq.com)
 - GitHub：[@mengjoy](https://github.com/mengjoy)
 - 个人网站: [mengjoy的个人网站](https://mengjoy.github.io/about)
 

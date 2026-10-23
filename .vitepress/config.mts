@@ -10,6 +10,8 @@ export default defineConfig({
   // 关键：生成 /about/ -> about/index.html 这种目录形态，
   // 否则 GitHub Pages 等静态托管访问 /about/ 会 404
   cleanUrls: true,
+  // 锁定深空暗色基调：星空背景只在暗色下好看，禁止切到浅色
+  appearance: 'force-dark',
 
   // 环境 workaround：本机 Node 被注入了 safe-delete shim，
   // 构建时清空 dist 会触发它调 genie-trash 失败、导致 build 中断。
