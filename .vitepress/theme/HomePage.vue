@@ -34,7 +34,7 @@ const features = [
     <!-- 技能树（雷达图） -->
     <section class="skills">
       <h2>技能树</h2>
-      <p class="skills-sub">根据日常写的内容与项目经验评估的熟练度（0–100）。</p>
+      <p class="skills-sub">雷达图按各技能方向下的文章数量自动统计生成，轴越长代表该方向文章越多。</p>
       <SkillRadar />
     </section>
   </div>
