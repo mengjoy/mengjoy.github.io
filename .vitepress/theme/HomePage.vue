@@ -13,8 +13,8 @@ const features = [
   <div class="home">
     <!-- Hero -->
     <header class="hero">
-      <h1 class="name">mengjoy</h1>
-      <p class="text">个人网站</p>
+      <h1 class="name">mengjoy个人网站</h1>
+      <br>
       <p class="tagline">记录技术与生活</p>
       <div class="actions">
         <a class="btn brand" href="/posts/">文章列表</a>
