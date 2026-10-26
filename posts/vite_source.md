@@ -28,3 +28,5 @@ description:  vite学习
 > 在dev和production是不一样的处理方式,在dev是它采用esm模式，很多代码无需打包，而且会对依赖预构建，然后按需编译，根据route编译当前的页面。而在production环境下，则和webpack一样，要进行构建依赖图等过程（所以在production下，其实两个都一样）。vite在dev时采用esbuild快速编译，在production时rollup负责构建时的深度优化。
 
 其实不管是什么工具，他们做的事情都是将很多资源转译为浏览器可识别的代码，会对打包产物进行优化，比如压缩，根据入口进行code slitinng，还有如何让资源更小等等优化方式。
+
+# webpack迁移道vite做了什么？

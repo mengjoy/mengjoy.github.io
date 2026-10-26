@@ -1,5 +1,5 @@
 ---
-title: HMR
+title: HMR热更新
 date: 2026-10-14
 categories:
   - vite
