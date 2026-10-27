@@ -1,1 +1,0 @@
-import{_ as t,o as e,c as o}from"./chunks/framework.DqMqoJl9.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"posts/job1.md","filePath":"posts/job1.md","lastUpdated":1791859056000}'),s={name:"posts/job1.md"};function a(r,c,n,p,d,_){return e(),o("div")}const f=t(s,[["render",a]]);export{m as __pageData,f as default};
